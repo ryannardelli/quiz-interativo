@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Montserrat", sans-serif;
+    background-image: url('../img/image-background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#container-main {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: .5px 10px 15px rgba(0, 0, 0, .2);
+    text-align: center;
+    padding: 20px;
+    width: 400px;
+}
+
+#container-main h1 {
+    font-size: 1.3rem;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px #000;
+}
+
+@media (min-width: 768px) {
+    #container-main {
+        width: 800px;
+    }
+
+    #container-main h1 {
+        font-size: 1.8rem;
+        font-weight: bolder;
+        letter-spacing: 2px;
+        text-shadow: 1px 1px 1px #000;
+    }
+}

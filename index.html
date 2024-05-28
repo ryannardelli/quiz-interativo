@@ -12,12 +12,34 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- STYLE CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <!-- FAVICON -->
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
     <!-- INDEX JS -->
     <script src="js/index.js" defer></script>  
 </head>
 <body>
-    
+    <div class="container" id="container-main">
+        <h1>Teste seus conhecimentos</h1>
+        <div class="col-12 p-2">
+            <img src="https://image.tmdb.org/t/p/w185/spydMyyD81HjGJVwZvjajkrWW1h.jpg" alt="" class="img-fluid">
+        </div>
+        <p class="fw-bold">Pontuação: 0</p>
+        <p class="fw-bold">Erros: 0</p>
+        <p id="question">Teste</p>
+
+        <div class="mb-4" id="choices">
+            <button class="btn btn-outline-info" id="choice1">Outline</button>
+            <button class="btn btn-outline-info" id="choice2">Outline</button>
+            <button class="btn btn-outline-info" id="choice3">Outline</button>
+            <button class="btn btn-outline-info" id="choice4">Outline</button>
+        </div>
+
+        <button class="btn btn-primary" id="next">Próxima</button>
+    </div>
 </body>
 </html>
