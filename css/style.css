@@ -25,9 +25,15 @@ body {
     text-shadow: 1px 1px 1px #000;
 }
 
+#choices {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 @media (min-width: 768px) {
     #container-main {
-        width: 800px;
+        width: 600px;
     }
 
     #container-main h1 {
