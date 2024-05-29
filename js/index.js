@@ -25,7 +25,7 @@ function loadQuestion() {
     questionElement.innerHTML = currentQuestionData.question;
     img_question.src = currentQuestionData.url;
 
-    const choices = currentQuestionData.choices;
+    const choices = shuffleArray(currentQuestionData.choices);
 
     for(let i = 0; i < choiceElements.length; i++) {
         choiceElements[i].innerHTML = choices[i];
@@ -33,8 +33,6 @@ function loadQuestion() {
 
     answerChosen = false;
 }
-
-activeToast();
 
 function checkAnswer(e) {
     if(answerChosen) return;
@@ -69,5 +67,20 @@ function activeToast() {
     });
 }
 
+function shuffleArray(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
 
+activeToast();
 loadQuestion();
