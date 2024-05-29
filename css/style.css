@@ -31,6 +31,9 @@ body {
     gap: 10px;
 }
 
+#choice:disabled {
+    background: #eee;
+}
 @media (min-width: 768px) {
     #container-main {
         width: 600px;

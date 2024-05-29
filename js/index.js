@@ -13,6 +13,7 @@ const nextButton = document.querySelector('#next');
 const scoreElement = document.querySelector('#score');
 const wrongElement = document.querySelector('#wrong');
 const img_question = document.querySelector('#img-question');
+const toastBody = document.querySelector('.toast-body');
 
 let currentQuestion = 0;
 let score = 0;
@@ -29,6 +30,44 @@ function loadQuestion() {
     for(let i = 0; i < choiceElements.length; i++) {
         choiceElements[i].innerHTML = choices[i];
     }
+
+    answerChosen = false;
 }
+
+activeToast();
+
+function checkAnswer(e) {
+    if(answerChosen) return;
+    answerChosen = true;
+
+    document.querySelector('#liveToast').classList.remove('d-none');
+
+    if(e.target.innerText === questions[currentQuestion].answer) {
+        score++
+        scoreElement.innerHTML = `Pontuação ${score}`;
+        toastBody.innerHTML = 'Resposta correta! Parabéns, você acertou.';
+    } else {
+        wrong++;
+        wrongElement.innerHTML = `Erros: ${wrong}`;
+        toastBody.innerHTML = 'Infezlimente, você errou. A resposta correta é 2015.'
+    }
+
+    choiceElements.forEach(element => {
+        element.disabled = true;
+    });
+}
+
+choiceElements.forEach((element) => {
+  element.addEventListener("click", checkAnswer);
+});
+
+function activeToast() {
+    document.addEventListener('DOMContentLoaded', function () {
+        const toastEl = document.getElementById('liveToast');
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    });
+}
+
 
 loadQuestion();
