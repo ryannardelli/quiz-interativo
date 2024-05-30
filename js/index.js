@@ -1,12 +1,49 @@
 const questions = [
     {
-      question: "Em que ano foi lançado?",
-      choices: ["2015", "2010", "1990", "2023"],
-      answer: "2015",
-      url: 'https://image.tmdb.org/t/p/w185/spydMyyD81HjGJVwZvjajkrWW1h.jpg'
+        question: "Em que ano foi lançado?",
+        choices: ["2015", "2010", "1990", "2023"],
+        answer: "2015",
+        url: 'https://image.tmdb.org/t/p/w185/spydMyyD81HjGJVwZvjajkrWW1h.jpg'
+    },
+
+    {
+        question: "Qual gênero NÃO pertence a este filme?",
+        choices: ["Aventura", "Fantasia", "Ação", "Terror"],
+        answer: "Terror",
+        url: ''
+    },
+
+    {
+        question: "Qual o nome do protagonista principal?",
+        choices: ["Wade Wilson", "Vanessa", "Ajax", "Colossus"],
+        answer: "Wade",
+        url: ''
+    },
+
+    {
+        question: "Em que país foi produzido?",
+        choices: ["Estados Unidos", "Brasil", "Holanda", "Itália"],
+        answer: "Estados Unidos",
+        url: ''
+    },
+
+    {
+        question: "Quem dirgiu o filme?",
+        choices: ["Susanne Bie", "Christopher Nolan", "Quentin Tarantino", " Steven Spielberg"],
+        answer: "Susanne Bie",
+        url: ''
     },
 ];
 
+const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZjQ3NWFlZGZlODQyZTg5OGZhM2RhMTU5MWZhM2YwMSIsInN1YiI6IjY2MTMxMDRkMjgzZWQ5MDE2MjFkMWY5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2QIie_En542SCmRXmSq-W3ohjTV38SlRE91OchVRrr4'
+    }
+};
+
+const apiKey = 'df475aedfe842e898fa3da1591fa3f01';
 const questionElement = document.querySelector('#question');
 const choiceElements = Array.from(document.querySelectorAll('#choice'));
 const nextButton = document.querySelector('#next');
@@ -19,6 +56,109 @@ let currentQuestion = 0;
 let score = 0;
 let wrong = 0;
 let answerChosen = false;
+
+async function fetchApi(url, options) {
+    try {
+        const response = await fetch(url, options);
+        return await response.json();
+    } catch(e) {
+        console.log(e)
+    }
+};
+
+async function getConfigApi() {
+    const config = await fetchApi('https://api.themoviedb.org/3/configuration', options);
+    return config;
+};
+
+async function getsizeImg() {
+    const config = await fetchApi('https://api.themoviedb.org/3/configuration', options);
+    return config.images.poster_sizes[2];
+};
+
+async function getBaseUrl() {
+    const response = await getConfigApi();
+    return response.images.base_url;
+};
+
+async function getMovies() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=2}`, options);
+    return response.results;
+};
+
+async function setMovies() {
+    const response = await getMovies();
+    console.log(response);
+}
+
+
+async function getMovieDetails_one() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${122}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getMovieDetails_two() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${293660}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getMovieDetails_three() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${218}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getMovieDetails_four() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${405774}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getMovieDetails_elenco_movie_two() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${293660}/credits?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getMovieDetails_elenco_movie_three() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${218}/credits?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+
+async function setMovieDetails_one() {
+    const response = await getMovieDetails_one();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[1].url = base_url + size_img + response.poster_path;
+}
+
+async function setMovieDetails_two() {
+    const response = await getMovieDetails_two();
+    const detail_respose = await getMovieDetails_elenco_movie_two();
+    console.log(detail_respose);
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[2].url = base_url + size_img + response.poster_path;
+}
+
+async function setMovieDetails_three() {
+    const response = await getMovieDetails_three();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[3].url = base_url + size_img + response.poster_path;
+}
+
+async function setMovieDetails_four() {
+    const response = await getMovieDetails_four();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[4].url = base_url + size_img + response.poster_path;
+}
+
+
+setMovieDetails_one();
+setMovieDetails_two();
+setMovieDetails_three();
+setMovieDetails_four();
+setMovies();
 
 function loadQuestion() {
     const currentQuestionData = questions[currentQuestion];
@@ -34,6 +174,8 @@ function loadQuestion() {
     answerChosen = false;
 }
 
+// nextButton.disabled = true;
+
 function checkAnswer(e) {
     if(answerChosen) return;
     answerChosen = true;
@@ -47,17 +189,13 @@ function checkAnswer(e) {
     } else {
         wrong++;
         wrongElement.innerHTML = `Erros: ${wrong}`;
-        toastBody.innerHTML = 'Infezlimente, você errou. A resposta correta é 2015.'
+        toastBody.innerHTML = `Resposta incorreta. A resposta correta é ${questions[currentQuestion].answer}.`
     }
 
-    choiceElements.forEach(element => {
-        element.disabled = true;
-    });
+    // choiceElements.forEach(element => {
+    //     element.disabled = true;
+    // });
 }
-
-choiceElements.forEach((element) => {
-  element.addEventListener("click", checkAnswer);
-});
 
 function activeToast() {
     document.addEventListener('DOMContentLoaded', function () {
@@ -69,7 +207,7 @@ function activeToast() {
 
 function shuffleArray(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
-    
+
     while (0 !== currentIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
@@ -80,7 +218,19 @@ function shuffleArray(array) {
     }
   
     return array;
-  }
+}
+
+nextButton.addEventListener("click", () => {
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+      loadQuestion();
+    }
+});
+
+choiceElements.forEach((element) => {
+  element.addEventListener("click", checkAnswer);
+});
 
 activeToast();
 loadQuestion();

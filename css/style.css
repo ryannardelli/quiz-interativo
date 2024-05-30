@@ -15,7 +15,7 @@ body {
     box-shadow: .5px 10px 15px rgba(0, 0, 0, .2);
     text-align: center;
     padding: 20px;
-    width: 400px;
+    width: 450px;
 }
 
 #container-main h1 {
@@ -25,18 +25,12 @@ body {
     text-shadow: 1px 1px 1px #000;
 }
 
-#choices {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
 #choice:disabled {
     background: #eee;
 }
 @media (min-width: 768px) {
     #container-main {
-        width: 600px;
+        width: 800px;
     }
 
     #container-main h1 {
