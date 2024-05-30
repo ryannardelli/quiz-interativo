@@ -2,8 +2,8 @@ const questions = [
     {
         question: "Em que ano foi lançado?",
         choices: ["2015", "2010", "1990", "2023"],
-        answer: "2015",
-        url: 'https://image.tmdb.org/t/p/w185/spydMyyD81HjGJVwZvjajkrWW1h.jpg'
+        answer: "2023",
+        url: 'http://image.tmdb.org/t/p/w185/wDWAA5QApz5L5BKfFaaj8HJCAQM.jpg'
     },
 
     {
@@ -16,7 +16,7 @@ const questions = [
     {
         question: "Qual o nome do protagonista principal?",
         choices: ["Wade Wilson", "Vanessa", "Ajax", "Colossus"],
-        answer: "Wade",
+        answer: "Wade Wilson",
         url: ''
     },
 
@@ -31,6 +31,20 @@ const questions = [
         question: "Quem dirgiu o filme?",
         choices: ["Susanne Bie", "Christopher Nolan", "Quentin Tarantino", " Steven Spielberg"],
         answer: "Susanne Bie",
+        url: ''
+    },
+
+    {
+        question: "Em que ano foi lançado?",
+        choices: ["2021", "1978", "2005", "1960"],
+        answer: "1978",
+        url: ''
+    },
+
+    {
+        question: "Qual gênero pertence a este filme?",
+        choices: ["Ação", "Suspense", "Terror", "Drama"],
+        answer: "Ação",
         url: ''
     },
 ];
@@ -82,7 +96,7 @@ async function getBaseUrl() {
 };
 
 async function getMovies() {
-    const response = await fetchApi(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=2}`, options);
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=4}`, options);
     return response.results;
 };
 
@@ -91,11 +105,16 @@ async function setMovies() {
     console.log(response);
 }
 
+async function getMovieDetails_zero() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${385687}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
 
 async function getMovieDetails_one() {
     const response = await fetchApi(`https://api.themoviedb.org/3/movie/${122}?api_key=${apiKey}&language=pt-BR`, options);
     return response;
 };
+
 
 async function getMovieDetails_two() {
     const response = await fetchApi(`https://api.themoviedb.org/3/movie/${293660}?api_key=${apiKey}&language=pt-BR`, options);
@@ -112,6 +131,16 @@ async function getMovieDetails_four() {
     return response;
 };
 
+async function getMovieDetails_five() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${1924}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getMovieDetails_six() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${284052}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
 async function getMovieDetails_elenco_movie_two() {
     const response = await fetchApi(`https://api.themoviedb.org/3/movie/${293660}/credits?api_key=${apiKey}&language=pt-BR`, options);
     return response;
@@ -121,6 +150,13 @@ async function getMovieDetails_elenco_movie_three() {
     const response = await fetchApi(`https://api.themoviedb.org/3/movie/${218}/credits?api_key=${apiKey}&language=pt-BR`, options);
     return response;
 };
+
+async function setMovieDetails_zero() {
+    const response = await getMovieDetails_zero();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[0].url = base_url + size_img + response.poster_path;
+}
 
 
 async function setMovieDetails_one() {
@@ -132,8 +168,6 @@ async function setMovieDetails_one() {
 
 async function setMovieDetails_two() {
     const response = await getMovieDetails_two();
-    const detail_respose = await getMovieDetails_elenco_movie_two();
-    console.log(detail_respose);
     const base_url = await getBaseUrl();
     const size_img = await getsizeImg();
     questions[2].url = base_url + size_img + response.poster_path;
@@ -153,11 +187,28 @@ async function setMovieDetails_four() {
     questions[4].url = base_url + size_img + response.poster_path;
 }
 
+async function setMovieDetails_five() {
+    const response = await getMovieDetails_five();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[5].url = base_url + size_img + response.poster_path;
+}
 
+async function setMovieDetails_six() {
+    const response = await getMovieDetails_six();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[6].url = base_url + size_img + response.poster_path;
+}
+
+setMovieDetails_zero();
 setMovieDetails_one();
 setMovieDetails_two();
 setMovieDetails_three();
 setMovieDetails_four();
+setMovieDetails_five();
+setMovieDetails_six();
+
 setMovies();
 
 function loadQuestion() {
