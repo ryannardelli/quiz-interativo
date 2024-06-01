@@ -47,6 +47,27 @@ const questions = [
         answer: "Ação",
         url: ''
     },
+
+    {
+        question: "Em que ano foi lançado?",
+        choices: ["Tom Hanks", "1990", "2018", "2023"],
+        answer: "2019",
+        url: ''
+    },
+
+    {
+        question: "Qual o nome do ator que interpreta o Forest Gump?",
+        choices: ["Tom Hanks", "Robin Wright", "Arnold Schwarzenegger", "Vin Diesel"],
+        answer: "Tom Hanks",
+        url: ''
+    },
+
+    {
+        question: "Qual personagem NÃO faz parte deste filme?",
+        choices: ["Burro", "Sherk", "Fiona", "Lorde Farquaad"],
+        answer: "Lorde Farquaad",
+        url: ''
+    },
 ];
 
 const options = {
@@ -96,7 +117,7 @@ async function getBaseUrl() {
 };
 
 async function getMovies() {
-    const response = await fetchApi(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=4}`, options);
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=19}`, options);
     return response.results;
 };
 
@@ -141,13 +162,33 @@ async function getMovieDetails_six() {
     return response;
 };
 
-async function getMovieDetails_elenco_movie_two() {
+async function getMovieDetails_seven() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${301528}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getMovieDetails_eight() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${13}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getMovieDetails_nine() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${809}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function get_informations_movie_two() {
     const response = await fetchApi(`https://api.themoviedb.org/3/movie/${293660}/credits?api_key=${apiKey}&language=pt-BR`, options);
     return response;
 };
 
-async function getMovieDetails_elenco_movie_three() {
+async function get_informations_movie_three() {
     const response = await fetchApi(`https://api.themoviedb.org/3/movie/${218}/credits?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function get_informations_movie_eight() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${13}/credits?api_key=${apiKey}&language=pt-BR`, options);
     return response;
 };
 
@@ -201,6 +242,27 @@ async function setMovieDetails_six() {
     questions[6].url = base_url + size_img + response.poster_path;
 }
 
+async function setMovieDetails_seven() {
+    const response = await getMovieDetails_seven();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[7].url = base_url + size_img + response.poster_path;
+}
+
+async function setMovieDetails_eight() {
+    const response = await getMovieDetails_eight();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[8].url = base_url + size_img + response.poster_path;
+}
+
+async function setMovieDetails_nine() {
+    const response = await getMovieDetails_nine();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[9].url = base_url + size_img + response.poster_path;
+}
+
 setMovieDetails_zero();
 setMovieDetails_one();
 setMovieDetails_two();
@@ -208,6 +270,9 @@ setMovieDetails_three();
 setMovieDetails_four();
 setMovieDetails_five();
 setMovieDetails_six();
+setMovieDetails_seven();
+setMovieDetails_eight();
+setMovieDetails_nine();
 
 setMovies();
 
