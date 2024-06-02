@@ -68,6 +68,27 @@ const questions = [
         answer: "Lorde Farquaad",
         url: ''
     },
+
+    {
+        question: 'Qual é o nome verdadeiro do personagem conhecido como "O Professor"?',
+        choices: ["Sergio Marquina", "Andres de Fonollosa", "Aníbal Cortés", "Agustín Ramos"],
+        answer: "Sergio Marquina",
+        url: ''
+    },
+
+    {
+        question: 'Quem é o criador da série?',
+        choices: ["Vince Gilligan", "David Chase", "Matthew Weiner", "J.J. Abrams"],
+        answer: "Vince Gilligan",
+        url: ''
+    },
+
+    {
+        question: 'Qual é o animal que representa o personagem Mordecai?',
+        choices: ["Guaxinim", "Pica-pau", "Gato", "Esquilo"],
+        answer: "Pica-pau",
+        url: ''
+    },
 ];
 
 const options = {
@@ -121,10 +142,17 @@ async function getMovies() {
     return response.results;
 };
 
-async function setMovies() {
-    const response = await getMovies();
+async function getSeries() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=pt-BR&page=2}`, options);
+    return response.results;
+};
+
+async function setSeries() {
+    const response = await getSeries();
     console.log(response);
 }
+
+setSeries();
 
 async function getMovieDetails_zero() {
     const response = await fetchApi(`https://api.themoviedb.org/3/movie/${385687}?api_key=${apiKey}&language=pt-BR`, options);
@@ -177,18 +205,18 @@ async function getMovieDetails_nine() {
     return response;
 };
 
-async function get_informations_movie_two() {
-    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${293660}/credits?api_key=${apiKey}&language=pt-BR`, options);
+async function getSerieDetails_one() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${71446}?api_key=${apiKey}&language=pt-BR`, options);
     return response;
 };
 
-async function get_informations_movie_three() {
-    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${218}/credits?api_key=${apiKey}&language=pt-BR`, options);
+async function getSerieDetails_two() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${1396}?api_key=${apiKey}&language=pt-BR`, options);
     return response;
 };
 
-async function get_informations_movie_eight() {
-    const response = await fetchApi(`https://api.themoviedb.org/3/movie/${13}/credits?api_key=${apiKey}&language=pt-BR`, options);
+async function getSerieDetails_three() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${31132}?api_key=${apiKey}&language=pt-BR`, options);
     return response;
 };
 
@@ -263,6 +291,28 @@ async function setMovieDetails_nine() {
     questions[9].url = base_url + size_img + response.poster_path;
 }
 
+async function setSerieDetails_one() {
+    const response = await getSerieDetails_one();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[10].url = base_url + size_img + response.poster_path;
+}
+
+async function setSerieDetails_two() {
+    const response = await getSerieDetails_two();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[11].url = base_url + size_img + response.poster_path;
+}
+
+async function setSerieDetails_three() {
+    const response = await getSerieDetails_three();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[12].url = base_url + size_img + response.poster_path;
+}
+
+// filme
 setMovieDetails_zero();
 setMovieDetails_one();
 setMovieDetails_two();
@@ -274,7 +324,10 @@ setMovieDetails_seven();
 setMovieDetails_eight();
 setMovieDetails_nine();
 
-setMovies();
+// série
+setSerieDetails_one();
+setSerieDetails_two();
+setSerieDetails_three();
 
 function loadQuestion() {
     const currentQuestionData = questions[currentQuestion];
