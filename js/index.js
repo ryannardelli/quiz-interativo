@@ -83,10 +83,60 @@ const questions = [
         url: ''
     },
 
+    
     {
         question: 'Qual é o animal que representa o personagem Mordecai?',
         choices: ["Guaxinim", "Pica-pau", "Gato", "Esquilo"],
         answer: "Pica-pau",
+        url: ''
+    },
+
+    {
+        question: 'Qual é o nome do mundo paralelo assustador que é central para a trama de Stranger Things?',
+        choices: ["Mundo Invertido", "Dimensão Sombria", "Terra Obscura", "Reino do Demogorgon"],
+        answer: "Mundo Invertido",
+        url: ''
+    },
+
+    {
+        question: 'Qual é o nome do capitão dos Piratas do Chapéu de Palha em "One Piece"?',
+        choices: ["Roronoa Zoro", "Monkey D. Luffy", "Portgas D. Ace", "Trafalgar Law"],
+        answer: "Monkey D. Luffy",
+        url: ''
+    },
+
+    {
+        question: 'Qual é o nome do cientista louco que protagoniza "Rick and Morty"?',
+        choices: ["Dr. Smith", "Professor Brown", "Rick Sanchez", "Dr. Wily"],
+        answer: "Rick Sanchez",
+        url: ''
+    },
+
+    {
+        question: 'Qual é o evento catastrófico que é o foco principal da série "Chernobyl"?',
+        choices: ["Explosão de um reator nuclear", "Guerra Civil", "Tsunami", "Epidemia"],
+        answer: "Explosão de um reator nuclear",
+        url: ''
+    },
+
+    {
+        question: 'Qual é o nome do supervilão que é o principal antagonista em "O Espetacular Homem-Aranha"?',
+        choices: ["Duende Verde", "Doutor Octopus", "Venom", "Rei do Crime"],
+        answer: "Duende Verde",
+        url: ''
+    },
+
+    {
+        question: 'Qual é o nome do quartel de bombeiros principal onde se passa a série "Chicago Fire"?',
+        choices: ["Estação 51", "Base 12", "Quartel 33", "Central de Incêndios 17"],
+        answer: "Estação 51",
+        url: ''
+    },
+
+    {
+        question: 'Qual é o nome do protagonista humano que foi congelado e acordou no futuro em "Futurama"?',
+        choices: ["Bender Rodríguez", "Fry Philip J.", "Leela Turanga", "Professor Farnsworth"],
+        answer: "Fry Philip J.",
         url: ''
     },
 ];
@@ -136,23 +186,6 @@ async function getBaseUrl() {
     const response = await getConfigApi();
     return response.images.base_url;
 };
-
-async function getMovies() {
-    const response = await fetchApi(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=19}`, options);
-    return response.results;
-};
-
-async function getSeries() {
-    const response = await fetchApi(`https://api.themoviedb.org/3/tv/top_rated?api_key=${apiKey}&language=pt-BR&page=2}`, options);
-    return response.results;
-};
-
-async function setSeries() {
-    const response = await getSeries();
-    console.log(response);
-}
-
-setSeries();
 
 async function getMovieDetails_zero() {
     const response = await fetchApi(`https://api.themoviedb.org/3/movie/${385687}?api_key=${apiKey}&language=pt-BR`, options);
@@ -219,6 +252,42 @@ async function getSerieDetails_three() {
     const response = await fetchApi(`https://api.themoviedb.org/3/tv/${31132}?api_key=${apiKey}&language=pt-BR`, options);
     return response;
 };
+
+async function getSerieDetails_four() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${66732}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getSerieDetails_five() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${37854}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getSerieDetails_six() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${60625}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getSerieDetails_seven() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${87108}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getSerieDetails_eight() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${3854}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getSerieDetails_nine() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${44006}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
+async function getSerieDetails_ten() {
+    const response = await fetchApi(`https://api.themoviedb.org/3/tv/${615}?api_key=${apiKey}&language=pt-BR`, options);
+    return response;
+};
+
 
 async function setMovieDetails_zero() {
     const response = await getMovieDetails_zero();
@@ -312,6 +381,55 @@ async function setSerieDetails_three() {
     questions[12].url = base_url + size_img + response.poster_path;
 }
 
+async function setSerieDetails_four() {
+    const response = await getSerieDetails_four();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[13].url = base_url + size_img + response.poster_path;
+}
+
+async function setSerieDetails_five() {
+    const response = await getSerieDetails_five();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[14].url = base_url + size_img + response.poster_path;
+}
+
+async function setSerieDetails_six() {
+    const response = await getSerieDetails_six();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[15].url = base_url + size_img + response.poster_path;
+}
+
+async function setSerieDetails_seven() {
+    const response = await getSerieDetails_seven();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[16].url = base_url + size_img + response.poster_path;
+}
+
+async function setSerieDetails_eight() {
+    const response = await getSerieDetails_eight();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[17].url = base_url + size_img + response.poster_path;
+}
+
+async function setSerieDetails_nine() {
+    const response = await getSerieDetails_nine();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[18].url = base_url + size_img + response.poster_path;
+}
+
+async function setSerieDetails_ten() {
+    const response = await getSerieDetails_ten();
+    const base_url = await getBaseUrl();
+    const size_img = await getsizeImg();
+    questions[19].url = base_url + size_img + response.poster_path;
+}
+
 // filme
 setMovieDetails_zero();
 setMovieDetails_one();
@@ -328,6 +446,13 @@ setMovieDetails_nine();
 setSerieDetails_one();
 setSerieDetails_two();
 setSerieDetails_three();
+setSerieDetails_four();
+setSerieDetails_five();
+setSerieDetails_six();
+setSerieDetails_seven();
+setSerieDetails_eight();
+setSerieDetails_nine();
+setSerieDetails_ten();
 
 function loadQuestion() {
     const currentQuestionData = questions[currentQuestion];
