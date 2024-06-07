@@ -50,7 +50,7 @@ const questions = [
 
     {
         question: "Em que ano foi lançado?",
-        choices: ["Tom Hanks", "1990", "2018", "2023"],
+        choices: ["2019", "1990", "2018", "2023"],
         answer: "2019",
         url: ''
     },
