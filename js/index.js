@@ -465,14 +465,12 @@ function loadQuestion() {
         choiceElements[i].innerHTML = choices[i];
     }
 
-    answerChosen = false;
+    // answerChosen = false;
 }
 
-// nextButton.disabled = true;
-
 function checkAnswer(e) {
-    if(answerChosen) return;
-    answerChosen = true;
+    // if(answerChosen) return;
+    // answerChosen = true;
 
     document.querySelector('#liveToast').classList.remove('d-none');
 
@@ -485,10 +483,6 @@ function checkAnswer(e) {
         wrongElement.innerHTML = `Erros: ${wrong}`;
         toastBody.innerHTML = `Resposta incorreta. A resposta correta é ${questions[currentQuestion].answer}.`
     }
-
-    // choiceElements.forEach(element => {
-    //     element.disabled = true;
-    // });
 }
 
 function activeToast() {
@@ -514,16 +508,38 @@ function shuffleArray(array) {
     return array;
 }
 
+disabledButtonNext();
+
 nextButton.addEventListener("click", () => {
     currentQuestion++;
+    activeButtons();
 
     if (currentQuestion < questions.length) {
+      disabledButtonNext();
       loadQuestion();
     }
 });
 
+function disabledButtons() {
+    document.querySelectorAll('#choice').forEach(button => button.disabled = true);
+}
+
+function activeButtons() {
+    document.querySelectorAll('#choice').forEach(button => button.disabled = false);
+}
+
+function disabledButtonNext() {
+    nextButton.disabled = true;
+}
+
+function activeButtonNext() {
+    nextButton.disabled = false;
+}
+
 choiceElements.forEach((element) => {
   element.addEventListener("click", checkAnswer);
+  element.addEventListener("click", disabledButtons);
+  element.addEventListener("click", activeButtonNext);
 });
 
 activeToast();
