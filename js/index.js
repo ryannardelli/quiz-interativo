@@ -464,14 +464,9 @@ function loadQuestion() {
     for(let i = 0; i < choiceElements.length; i++) {
         choiceElements[i].innerHTML = choices[i];
     }
-
-    // answerChosen = false;
 }
 
 function checkAnswer(e) {
-    // if(answerChosen) return;
-    // answerChosen = true;
-
     document.querySelector('#liveToast').classList.remove('d-none');
 
     if(e.target.innerText === questions[currentQuestion].answer) {
