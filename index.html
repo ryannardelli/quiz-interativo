@@ -25,11 +25,18 @@
     <!-- MAIN -->
     <div class="container" id="container-main">
         <h1>Teste seus conhecimentos</h1>
-        <div class="col-12 p-2">
+        <div class="col-12 p-2" id="items">
             <img src="" alt="" class="img-fluid" id="img-question">
-            <!-- <div class="spinner-border text-success" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div> -->
+            <div id="time">
+               <div class="circle" style="--clr: #04fc43;">
+                <div class="dots sec_dot"></div>
+                <svg>
+                    <circle cx="70" cy="70" r="70"></circle>
+                    <circle cx="70" cy="70" r="70" id="ss"></circle>
+                </svg>
+                <div id="seconds">00</div>
+               </div>
+            </div>
         </div>
         <div class="col-12 d-flex justify-content-center p-2">          
             <p class="fw-bold" id="score">Pontuação: 0</p>

@@ -539,3 +539,25 @@ choiceElements.forEach((element) => {
 
 activeToast();
 loadQuestion();
+
+// script do temporarizador
+
+function initTemp() {
+    let seconds = document.querySelector('#seconds');
+    let ss = document.querySelector('#ss');
+    let seconds_cont = 30;
+
+    const intervalo = setInterval(function() {
+        seconds.textContent = seconds_cont;
+
+        seconds_cont--;
+
+        if (seconds_cont < 0) {
+            seconds_cont = 30;
+        }
+        ss.style.strokeDashoffset = 440 - (440 / 30) * (30 - seconds_cont);
+    }, 1000);
+
+}
+
+initTemp();
