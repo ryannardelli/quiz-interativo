@@ -2,7 +2,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: auto;
     font-family: "Montserrat", sans-serif;
     background-image: url('../img/image-background.jpg');
     background-size: cover;
@@ -16,7 +16,8 @@ body {
     box-shadow: .5px 10px 15px rgba(0, 0, 0, .2);
     text-align: center;
     padding: 20px;
-    width: 450px;
+    width: 100%;
+    font-size: 1.3rem;
 }
 
 #container-main h1 {
@@ -33,6 +34,10 @@ body {
     background-color: #00BFFF;
     border-color: #00BFFF;
     transition: 0.4s;
+}
+
+#choice {
+    width: 300px;
 }
 
 #choice:hover {
@@ -114,9 +119,15 @@ body {
 #choice:disabled {
     background: #87CEFA;
 }
+
 @media (min-width: 768px) {
+
+    body {
+        height: 100vh;
+    }
+
     #container-main {
-        width: 800px;
+        width: 700px;
     }
 
     #container-main h1 {
