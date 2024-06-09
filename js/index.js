@@ -467,17 +467,22 @@ function loadQuestion() {
 }
 
 function checkAnswer(e) {
-    document.querySelector('#liveToast').classList.remove('d-none');
+    const toastEl = document.querySelector('#liveToast');
+    const toast = new bootstrap.Toast(toastEl);
+
+    toastEl.classList.remove('d-none');
 
     if(e.target.innerText === questions[currentQuestion].answer) {
-        score++
-        scoreElement.innerHTML = `Pontuação ${score}`;
+        score++;
+        scoreElement.innerHTML = `Pontuação: ${score}`;
         toastBody.innerHTML = 'Resposta correta! Parabéns, você acertou.';
     } else {
         wrong++;
         wrongElement.innerHTML = `Erros: ${wrong}`;
-        toastBody.innerHTML = `Resposta incorreta. A resposta correta é ${questions[currentQuestion].answer}.`
+        toastBody.innerHTML = `Resposta incorreta. A resposta correta é ${questions[currentQuestion].answer}.`;
     }
+
+    toast.show();
 }
 
 function activeToast() {
@@ -487,6 +492,13 @@ function activeToast() {
         toast.show();
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const toastEl = document.getElementById('liveToast');
+    toastEl.addEventListener('hidden.bs.toast', function () {
+        toastEl.classList.add('d-none');
+    });
+});
 
 function shuffleArray(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -586,29 +598,5 @@ function initTemp() {
         }
     });
 }
-
-// function restartTemp() {
-//     let seconds = document.querySelector('#seconds');
-//     let seconds_cont = 10;
-//     let restartCounter = false;
-//     const interval = setInterval(function() {
-//         seconds.textContent = seconds_cont;
-//         seconds_cont--;
-
-//         if (restartCounter) {
-//             clearInterval(interval)
-//             seconds_cont = 10;
-//             // restartCounter = false;
-//         }
-
-//         // Atualize o gráfico de contagem regressiva
-//         ss.style.strokeDashoffset = 440 - (440 / 10) * (10 - seconds_cont);
-//     }, 1000);
-
-//     // nextButton.addEventListener('click', () => {
-//     //     restartCounter = true;
-//     // });
-// }
-
 
 initTemp();
