@@ -541,21 +541,30 @@ activeToast();
 loadQuestion();
 
 // script do temporarizador
-
 function initTemp() {
     let seconds = document.querySelector('#seconds');
     let ss = document.querySelector('#ss');
-    let seconds_cont = 30;
+    let seconds_cont = 10;
 
-    const intervalo = setInterval(function() {
+   const interval =  setInterval(function() {
         seconds.textContent = seconds_cont;
-
         seconds_cont--;
 
         if (seconds_cont < 0) {
-            seconds_cont = 30;
+            seconds_cont = 10;
+            wrong++;
+            wrongElement.innerHTML = `Erros: ${wrong}`;
+            currentQuestion++;
+
+        if (currentQuestion < questions.length) {
+            loadQuestion();
+        } else {
+            clearInterval(interval);
         }
-        ss.style.strokeDashoffset = 440 - (440 / 30) * (30 - seconds_cont);
+
+        }
+
+        ss.style.strokeDashoffset = 440 - (440 / 10) * (10 - seconds_cont);
     }, 1000);
 
 }
