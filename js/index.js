@@ -520,7 +520,6 @@ disabledButtonNext();
 nextButton.addEventListener("click", () => {
     currentQuestion++;
     activeButtons();
-    // restartTemp();
 
     if (currentQuestion < questions.length) {
       disabledButtonNext();
@@ -583,20 +582,28 @@ function initTemp() {
         }, 1000);
     }
 
+    function stopTimer() {
+        clearInterval(interval);
+    }
+
     startTimer();
 
     nextButton.addEventListener('click', () => {
         clearInterval(interval);
         seconds_cont = 10;
-        // currentQuestion++;
         
         if (currentQuestion < questions.length) {
             loadQuestion();
-            startTimer(); // Reinicia o timer para a próxima pergunta
+            startTimer();
         } else {
             // Lógica adicional para quando todas as perguntas tiverem terminado
         }
     });
+
+    choiceElements.forEach((element) => {
+        element.addEventListener("click", stopTimer);
+    });
 }
+
 
 initTemp();
