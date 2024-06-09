@@ -508,6 +508,7 @@ disabledButtonNext();
 nextButton.addEventListener("click", () => {
     currentQuestion++;
     activeButtons();
+    // restartTemp();
 
     if (currentQuestion < questions.length) {
       disabledButtonNext();
@@ -545,28 +546,69 @@ function initTemp() {
     let seconds = document.querySelector('#seconds');
     let ss = document.querySelector('#ss');
     let seconds_cont = 10;
+    let interval;
 
-   const interval =  setInterval(function() {
-        seconds.textContent = seconds_cont;
-        seconds_cont--;
+    function startTimer() {
+        interval = setInterval(function() {
+            seconds.textContent = seconds_cont;
+            seconds_cont--;
 
-        if (seconds_cont < 0) {
-            seconds_cont = 10;
-            wrong++;
-            wrongElement.innerHTML = `Erros: ${wrong}`;
-            currentQuestion++;
+            if (seconds_cont < 0) {
+                seconds_cont = 10;
+                wrong++;
+                wrongElement.innerHTML = `Erros: ${wrong}`;
+                currentQuestion++;
 
+                if (currentQuestion < questions.length) {
+                    loadQuestion();
+                } else {
+                    clearInterval(interval);
+                    // Colocar aqui qualquer lógica adicional para quando as perguntas terminarem
+                }
+            }
+
+            ss.style.strokeDashoffset = 440 - (440 / 10) * (10 - seconds_cont);
+        }, 1000);
+    }
+
+    startTimer();
+
+    nextButton.addEventListener('click', () => {
+        clearInterval(interval);
+        seconds_cont = 10;
+        // currentQuestion++;
+        
         if (currentQuestion < questions.length) {
             loadQuestion();
+            startTimer(); // Reinicia o timer para a próxima pergunta
         } else {
-            clearInterval(interval);
+            // Lógica adicional para quando todas as perguntas tiverem terminado
         }
-
-        }
-
-        ss.style.strokeDashoffset = 440 - (440 / 10) * (10 - seconds_cont);
-    }, 1000);
-
+    });
 }
+
+// function restartTemp() {
+//     let seconds = document.querySelector('#seconds');
+//     let seconds_cont = 10;
+//     let restartCounter = false;
+//     const interval = setInterval(function() {
+//         seconds.textContent = seconds_cont;
+//         seconds_cont--;
+
+//         if (restartCounter) {
+//             clearInterval(interval)
+//             seconds_cont = 10;
+//             // restartCounter = false;
+//         }
+
+//         // Atualize o gráfico de contagem regressiva
+//         ss.style.strokeDashoffset = 440 - (440 / 10) * (10 - seconds_cont);
+//     }, 1000);
+
+//     // nextButton.addEventListener('click', () => {
+//     //     restartCounter = true;
+//     // });
+// }
+
 
 initTemp();
