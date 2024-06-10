@@ -465,6 +465,8 @@ function loadQuestion() {
     for(let i = 0; i < choiceElements.length; i++) {
         choiceElements[i].innerHTML = choices[i];
     }
+
+    disabledButtonNext();
 }
 
 function checkAnswer(e) {
@@ -515,8 +517,6 @@ function shuffleArray(array) {
   
     return array;
 }
-
-disabledButtonNext();
 
 nextButton.addEventListener("click", () => {
     currentQuestion++;
@@ -621,12 +621,13 @@ function restartQuiz() {
     wrongElement.innerText = "Erros: 0";
     loadQuestion();
     initTemp();
+    disabledButtonNext();
 }
 
 restartButton.addEventListener('click', () => {
     activeButtons();
     restartQuiz();
-    restartButton.style.zIndex = 0;
+    restartButton.style.display = 'none';
 });
 
 initTemp();
