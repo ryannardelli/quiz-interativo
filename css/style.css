@@ -55,6 +55,28 @@ body {
     position: absolute;
 }
 
+.button-container {
+    position: relative;
+    width: 100%;
+    height: 50px; /* Ajuste a altura conforme necessário */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#next, #restart {
+    position: absolute;
+}
+
+#next {
+    z-index: 1;
+}
+
+#restart {
+    z-index: 0;
+    display: none;
+}
+
 #time .circle {
     position: relative;
     width: 150px;

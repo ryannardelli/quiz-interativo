@@ -153,6 +153,7 @@ const apiKey = 'df475aedfe842e898fa3da1591fa3f01';
 const questionElement = document.querySelector('#question');
 const choiceElements = Array.from(document.querySelectorAll('#choice'));
 const nextButton = document.querySelector('#next');
+const restartButton = document.querySelector('#restart');
 const scoreElement = document.querySelector('#score');
 const wrongElement = document.querySelector('#wrong');
 const img_question = document.querySelector('#img-question');
@@ -574,7 +575,8 @@ function initTemp() {
                     loadQuestion();
                 } else {
                     clearInterval(interval);
-                    // Colocar aqui qualquer lógica adicional para quando as perguntas terminarem
+                    disabledButtons();
+                    handleButtonRestart();
                 }
             }
 
@@ -596,7 +598,8 @@ function initTemp() {
             loadQuestion();
             startTimer();
         } else {
-            // Lógica adicional para quando todas as perguntas tiverem terminado
+            disabledButtons();
+            handleButtonRestart();
         }
     });
 
@@ -605,5 +608,25 @@ function initTemp() {
     });
 }
 
+function handleButtonRestart() {
+    restartButton.style.display = 'block';
+    restartButton.style.zIndex = 2;
+}
+
+function restartQuiz() {
+    currentQuestion = 0;
+    score = 0;
+    wrong = 0;
+    scoreElement.innerText = "Pontuação: 0";
+    wrongElement.innerText = "Erros: 0";
+    loadQuestion();
+    initTemp();
+}
+
+restartButton.addEventListener('click', () => {
+    activeButtons();
+    restartQuiz();
+    restartButton.style.zIndex = 0;
+});
 
 initTemp();
