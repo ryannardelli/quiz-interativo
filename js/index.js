@@ -145,11 +145,11 @@ const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkZjQ3NWFlZGZlODQyZTg5OGZhM2RhMTU5MWZhM2YwMSIsInN1YiI6IjY2MTMxMDRkMjgzZWQ5MDE2MjFkMWY5OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.2QIie_En542SCmRXmSq-W3ohjTV38SlRE91OchVRrr4'
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkYjFmMWE3OWY5ODljM2ViMWNhNWZjNzM5ZjBmMDRkYSIsIm5iZiI6MTczMDg2NjM3MS43MTEwODQ0LCJzdWIiOiI2NjEzMTA0ZDI4M2VkOTAxNjIxZDFmOTkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.TnuVYQk9iEMrJb02g517J5E9xrJG-ddIeOhLabzaJKY'
     }
 };
 
-const apiKey = 'df475aedfe842e898fa3da1591fa3f01';
+const apiKey = 'db1f1a79f989c3eb1ca5fc739f0f04da';
 const questionElement = document.querySelector('#question');
 const choiceElements = Array.from(document.querySelectorAll('#choice'));
 const nextButton = document.querySelector('#next');
